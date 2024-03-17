@@ -51,14 +51,16 @@ export class CancellablePromise<ReturnType = unknown> extends Promise<ReturnType
   static defer<Args extends unknown[], ReturnType>(
     callback: (...args: Args) => ReturnType | PromiseLike<ReturnType>,
   ): (...args: Args) => CancellablePromise<ReturnType> {
-    return (...args: Args) =>
-      new CancellablePromise<ReturnType>(async (resolve, reject) => {
+    return (...args: Args) => {
+      const caller = () => callback(...args);
+      return new CancellablePromise<ReturnType>(async (resolve, reject) => {
         try {
-          const response = await callback(...args);
+          const response = await caller();
           resolve(response);
         } catch (error) {
           reject(error);
         }
       });
+    };
   }
 }

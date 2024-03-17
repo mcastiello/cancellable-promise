@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "commonjs",
+    "declaration": false
+  }
+}

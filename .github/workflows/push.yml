@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,4 +29,4 @@ jobs:
       - name: Build
         run: yarn build
       - name: Release
-        run: yarn publish
+        run: yarn publish --access=public
